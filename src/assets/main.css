@@ -1,0 +1,11 @@
+@import './base.css';
+
+#app {
+  height: 100%;
+}
+.el-form-item,
+label,
+button,
+a {
+  -webkit-app-region: no-drag;
+}

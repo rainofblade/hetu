@@ -1,0 +1,33 @@
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  background-color: #fff;
+  font-family:
+    Inter,
+    -apple-system,
+    BlinkMacSystemFont,
+    'Segoe UI',
+    Roboto,
+    Oxygen,
+    Ubuntu,
+    Cantarell,
+    'Fira Sans',
+    'Droid Sans',
+    'Helvetica Neue',
+    sans-serif;
+  font-size: 14px;
+  color: #303133;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+a {
+  text-decoration: none;
+  transition: 0.4s;
+  color: var(--el-color-primary);
+}
