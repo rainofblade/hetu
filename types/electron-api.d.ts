@@ -11,7 +11,7 @@ export interface IElectronAPI {
   getAppVersion(): Promise<string>
 
   onUpdateTitle(callback: (title: string) => void): Electron.IpcRenderer
-  onRoute(callback: (hashName: string) => void): Electron.IpcRenderer
+  onRoute(callback: (path: string) => void): Electron.IpcRenderer
 
   platform: string
   chrome: string

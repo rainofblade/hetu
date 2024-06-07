@@ -40,12 +40,11 @@ electronAPI.onUpdateTitle((title) => {
   -webkit-app-region: no-drag;
 }
 header {
-  height: 40px;
-  line-height: 40px;
+  height: 32px;
+  line-height: 32px;
   background-color: var(--el-color-primary);
   text-align: center;
   color: #fff;
-  font-weight: bold;
 }
 aside {
   width: 200px;

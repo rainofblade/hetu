@@ -125,12 +125,12 @@ const openAboutWindow = () => {
   }
 }
 
-const openSettingWindow = (hashName) => {
+const openSettingWindow = (path) => {
   if (settingWindow === null || settingWindow.isDestroyed()) {
-    settingWindow = createSettingWindow(hashName)
+    settingWindow = createSettingWindow(path)
   } else {
     settingWindow.focus()
-    settingWindow.webContents.send('route', hashName)
+    settingWindow.webContents.send('route', path)
   }
 }
 
@@ -159,13 +159,13 @@ const MENU_TPL = [
         label: '设置…',
         accelerator: 'CmdOrCtrl+,',
         click: () => {
-          openSettingWindow('general')
+          openSettingWindow('/')
         }
       },
       {
         label: '检查更新…',
         click: () => {
-          openSettingWindow('update')
+          openSettingWindow('/update')
         }
       },
       { type: 'separator' },

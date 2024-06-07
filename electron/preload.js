@@ -14,7 +14,7 @@ contextBridge.exposeInMainWorld('electronAPI', {
 
   // 主进程 -> 渲染进程
   onUpdateTitle: (callback) => ipcRenderer.on('update-title', (event, title) => callback(title)),
-  onRoute: (callback) => ipcRenderer.on('route', (event, hashName) => callback(hashName)),
+  onRoute: (callback) => ipcRenderer.on('route', (event, path) => callback(path)),
 
   // 系统信息
   platform: process.platform,

@@ -3,14 +3,14 @@ import { ref } from 'vue'
 import FileItem from './FileItem.vue'
 
 const files = ref([
-  { filePath: '/Users/ricky/Documents/河图云平台/项目文件/aaa.hp2' },
-  { filePath: '/Users/ricky/Documents/河图云平台/项目文件/bbb.hp2' },
-  { filePath: '/Users/ricky/Documents/河图云平台/项目文件/ccc.hp2' },
-  { filePath: '/Users/ricky/Documents/河图云平台/项目文件/ddd.hp1' },
-  { filePath: '/Users/ricky/Documents/河图云平台/项目文件/eee.hp1' },
-  { filePath: '/Users/ricky/Documents/河图云平台/项目文件/fff.hp1' },
-  { filePath: '/Users/ricky/Documents/河图云平台/项目文件/ggg.hpb' },
-  { filePath: '/Users/ricky/Documents/河图云平台/项目文件/hhh.hpb' }
+  { filePath: '/Users/ricky/Documents/河图云平台/项目文件/aaa.hp1' },
+  { filePath: '/Users/ricky/Documents/河图云平台/项目文件/bbb.hp1' },
+  { filePath: '/Users/ricky/Documents/河图云平台/项目文件/ccc.hp1' },
+  { filePath: '/Users/ricky/Documents/河图云平台/项目文件/ddd.hp2' },
+  { filePath: 'C:\\Users\\hyena\\Code\\项目文件\\eee.hp2' },
+  { filePath: 'C:\\Users\\hyena\\Code\\项目文件\\fff.hp2' },
+  { filePath: 'C:\\Users\\hyena\\Code\\项目文件\\ggg.hpb' },
+  { filePath: 'C:\\Users\\hyena\\Code\\项目文件\\hhh.hpb' }
 ])
 </script>
 

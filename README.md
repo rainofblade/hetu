@@ -3,10 +3,10 @@
 ## 环境依赖
 
 ```sh
-Node: 20.12.1
-npm: 10.5.0
+Node: 20.12.0+
+npm: 10.5.0+
 Python 3.11
-System: macOS 11.2
+System: macOS 11.2 & Windows 10
 ```
 
 ## 目录结构
@@ -30,6 +30,8 @@ System: macOS 11.2
 npm install
 ```
 
+for Windows: 删除 appdmg，同时安装 @rollup/rollup-win32-x64-msvc
+
 2. 启动本地开发环境
 
 ```sh
@@ -51,7 +53,7 @@ npm run b // 构建 Web
 npm run m // 构建 App
 ```
 
-Mac 注意事项：执行 make 时会依赖一些系统环境，如果失败，可以尝试以下方法
+for Mac：执行 make 时会依赖一些系统环境，如果失败，可以尝试以下方法
 
 ```sh
 1. npm i -D appdmg

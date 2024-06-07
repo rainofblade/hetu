@@ -1,13 +1,17 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import { RouterLink, RouterView, useRouter } from 'vue-router'
+import { RouterView, useRouter } from 'vue-router'
 
 const activeIndex = ref()
 const router = useRouter()
 
-electronAPI.onRoute((hashName) => {
-  router.push({ name: hashName })
-  activeIndex.value = ['general', 'update'].findIndex((item) => item == hashName) + ''
+const setAvtive = (index, indexPath) => {
+  activeIndex.value = index
+}
+
+electronAPI.onRoute((path) => {
+  activeIndex.value = path
+  router.push({ path })
 })
 </script>
 
@@ -17,19 +21,15 @@ electronAPI.onRoute((hashName) => {
       <el-container>
         <el-aside>
           <h1 class="title">设置</h1>
-          <el-menu :default-active="activeIndex" class="menu">
-            <RouterLink to="/">
-              <el-menu-item index="0">
-                <el-icon><Setting /></el-icon>
-                <span>通用</span>
-              </el-menu-item>
-            </RouterLink>
-            <RouterLink to="/update">
-              <el-menu-item index="1">
-                <el-icon><Box /></el-icon>
-                <span>软件更新</span>
-              </el-menu-item>
-            </RouterLink>
+          <el-menu router :default-active="activeIndex" class="menu" @select="setAvtive">
+            <el-menu-item index="/">
+              <el-icon><Setting /></el-icon>
+              <span>通用</span>
+            </el-menu-item>
+            <el-menu-item index="/update">
+              <el-icon><Box /></el-icon>
+              <span>软件更新</span>
+            </el-menu-item>
           </el-menu>
         </el-aside>
         <el-main><RouterView /></el-main>
@@ -61,14 +61,12 @@ aside {
 .menu {
   border-right: none;
   background-color: transparent;
-}
-.menu a {
-  display: block;
-  margin: 5px 0;
+  -webkit-app-region: no-drag;
 }
 .el-menu-item {
   height: 40px;
   border-radius: 8px;
+  margin-bottom: 5px;
 }
 .el-menu-item:hover {
   background-color: #fff;

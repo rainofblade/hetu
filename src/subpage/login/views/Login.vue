@@ -63,57 +63,61 @@ onMounted(() => {
 
 <template>
   <div class="login">
-    <img class="logo" src="@/assets/logo.png" />
-    <p class="loading" v-if="showLoading">正在登录…</p>
-    <div class="login-form" v-if="showLogin">
-      <el-form size="large" spellcheck="false">
-        <el-form-item>
-          <el-input
-            v-model.trim="username"
-            maxlength="20"
-            placeholder="请输入用户名"
-            @input="updateSubmit"
-            clearable
-            autofocus
-          />
-        </el-form-item>
-        <el-form-item>
-          <el-input
-            v-model.trim="password"
-            maxlength="20"
-            placeholder="请输入密码"
-            type="password"
-            @input="updateSubmit"
-            @keyup.enter="login"
-            clearable
-            show-password
-          />
-        </el-form-item>
-        <el-form-item>
-          <el-button type="primary" @click="login" :disabled="disableSubmit">登录</el-button>
-        </el-form-item>
-      </el-form>
-      <el-row>
-        <el-col :span="12" style="text-align: left">
-          <el-tooltip effect="dark" content="支持30天内自动登录" placement="bottom-start">
-            <el-checkbox v-model="autoLogin" label="自动登录" />
-          </el-tooltip>
-        </el-col>
-        <el-col :span="12" style="text-align: right; padding-top: 6px">
-          <el-link>忘记密码</el-link> | <el-link>注册账号</el-link>
-        </el-col>
-      </el-row>
+    <div class="login-wrap">
+      <img class="logo" src="@/assets/logo.png" />
+      <p class="loading" v-if="showLoading">正在登录…</p>
+      <div class="login-form" v-if="showLogin">
+        <el-form size="large" spellcheck="false">
+          <el-form-item>
+            <el-input
+              v-model.trim="username"
+              maxlength="20"
+              placeholder="请输入用户名"
+              @input="updateSubmit"
+              clearable
+              autofocus
+            />
+          </el-form-item>
+          <el-form-item>
+            <el-input
+              v-model.trim="password"
+              maxlength="20"
+              placeholder="请输入密码"
+              type="password"
+              @input="updateSubmit"
+              @keyup.enter="login"
+              clearable
+              show-password
+            />
+          </el-form-item>
+          <el-form-item>
+            <el-button type="primary" @click="login" :disabled="disableSubmit">登录</el-button>
+          </el-form-item>
+        </el-form>
+        <el-row>
+          <el-col :span="12" style="text-align: left">
+            <el-tooltip effect="dark" content="支持30天内自动登录" placement="bottom-start">
+              <el-checkbox v-model="autoLogin" label="自动登录" />
+            </el-tooltip>
+          </el-col>
+          <el-col :span="12" style="text-align: right; padding-top: 6px">
+            <el-link>忘记密码</el-link> | <el-link>注册账号</el-link>
+          </el-col>
+        </el-row>
+      </div>
     </div>
   </div>
 </template>
 
 <style scoped>
 .login {
+  height: 100%;
+  -webkit-app-region: drag;
+}
+.login-wrap {
   margin: 0 auto;
   width: 300px;
-  height: 100%;
   text-align: center;
-  -webkit-app-region: drag;
 }
 .logo {
   margin: 110px 0 30px 0;
