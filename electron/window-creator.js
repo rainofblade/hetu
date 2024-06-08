@@ -36,13 +36,15 @@ const createMainWindow = (filePath) => {
   const mainWindow = new CustomWindow({
     width: 1280,
     height: 800,
+    minWidth: 1080,
+    minHeight: 600,
     titleBarOverlay: {
       // for windos
       color: '#409eff',
       symbolColor: '#fff'
     },
-    trafficLightPosition: { x: 12, y: 12 },
-    maximize: true,
+    trafficLightPosition: { x: 8, y: 8 },
+    maximizeOnShow: true,
     entryFile: 'index.html'
   })
 
@@ -53,7 +55,7 @@ const createMainWindow = (filePath) => {
   return mainWindow
 }
 
-const createSettingWindow = (hashName) => {
+const createSettingWindow = (path) => {
   const settingWindow = new CustomWindow({
     width: 680,
     height: 560,
@@ -69,7 +71,7 @@ const createSettingWindow = (hashName) => {
   })
 
   settingWindow.webContents.on('dom-ready', () => {
-    settingWindow.webContents.send('route', hashName)
+    settingWindow.webContents.send('route', path)
   })
 
   return settingWindow

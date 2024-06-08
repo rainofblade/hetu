@@ -15,7 +15,8 @@ class CustomWindow extends BrowserWindow {
       frame: false,
       titleBarStyle: 'hidden',
       webPreferences: {
-        preload: path.join(dirname, 'preload.js')
+        preload: path.join(dirname, 'preload.js'),
+        spellcheck: false
       },
       ...options
     })
@@ -37,7 +38,7 @@ class CustomWindow extends BrowserWindow {
     })
 
     this.once('ready-to-show', () => {
-      if (!!options.maximize) {
+      if (!!options.maximizeOnShow) {
         this.maximize()
       }
       this.show()

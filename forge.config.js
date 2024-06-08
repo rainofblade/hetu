@@ -9,21 +9,22 @@ export default {
   rebuildConfig: {},
   makers: [
     // Windows
-    // {
-    //   name: '@electron-forge/maker-squirrel',
-    //   config: {}
-    // },
+    {
+      name: '@electron-forge/maker-squirrel',
+      config: {}
+    },
     // Mac
     {
       name: '@electron-forge/maker-dmg',
       config: {
         format: 'ULFO'
       }
+    },
+    // Zip
+    {
+      name: '@electron-forge/maker-zip',
+      platforms: ['darwin', 'win32']
     }
-    // {
-    //   name: '@electron-forge/maker-zip',
-    //   platforms: ['darwin', 'win32']
-    // }
   ],
   plugins: [
     {

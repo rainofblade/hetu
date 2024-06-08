@@ -5,7 +5,7 @@ import { RouterView, useRouter } from 'vue-router'
 const activeIndex = ref()
 const router = useRouter()
 
-const setAvtive = (index, indexPath) => {
+const setAvtive = (index: string) => {
   activeIndex.value = index
 }
 

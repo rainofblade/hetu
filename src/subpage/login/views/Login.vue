@@ -67,7 +67,7 @@ onMounted(() => {
       <img class="logo" src="@/assets/logo.png" />
       <p class="loading" v-if="showLoading">正在登录…</p>
       <div class="login-form" v-if="showLogin">
-        <el-form size="large" spellcheck="false">
+        <el-form size="large">
           <el-form-item>
             <el-input
               v-model.trim="username"

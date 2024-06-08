@@ -10,6 +10,8 @@ import {
 } from './window-creator.js'
 import { HELP_URL } from './config.js'
 
+// if (require('electron-squirrel-startup')) app.quit()
+
 const store = new Store()
 
 /*
@@ -191,7 +193,7 @@ const MENU_TPL = [
     role: 'windowMenu',
     submenu: [
       { label: '最小化', role: 'minimize' },
-      { label: '缩放', role: 'zoom' },
+      { label: '关闭', role: 'close' },
       { type: 'separator' },
       { label: '切换全屏', role: 'togglefullscreen' }
     ]
