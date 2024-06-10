@@ -156,7 +156,7 @@ const MENU_TPL = [
   {
     label: app.name, // package.json producName，开发环境不可修改
     submenu: [
-      { label: `关于${app.name}`, click: openAboutWindow },
+      { label: `关于 ${app.name}`, click: openAboutWindow },
       {
         label: '设置…',
         accelerator: 'CmdOrCtrl+,',
@@ -172,7 +172,7 @@ const MENU_TPL = [
       },
       { type: 'separator' },
       { label: '切换账号', click: switchAccount },
-      { label: `退出${app.name}`, role: 'quit' }
+      { label: `退出 ${app.name}`, role: 'quit' }
     ]
   },
   {

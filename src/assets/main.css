@@ -9,3 +9,6 @@ button,
 a {
   -webkit-app-region: no-drag;
 }
+#app .el-button:focus-visible {
+  outline: none;
+}

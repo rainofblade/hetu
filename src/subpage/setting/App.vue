@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { RouterView, useRouter } from 'vue-router'
+import { Setting, Box } from '@element-plus/icons-vue'
 
 const activeIndex = ref()
 const router = useRouter()
@@ -21,7 +22,12 @@ electronAPI.onRoute((path) => {
       <el-container>
         <el-aside>
           <h1 class="title">设置</h1>
-          <el-menu router :default-active="activeIndex" class="menu" @select="setAvtive">
+          <el-menu
+            :default-active="activeIndex"
+            @select="setAvtive"
+            background-color="transparent"
+            router
+          >
             <el-menu-item index="/">
               <el-icon><Setting /></el-icon>
               <span>通用</span>
@@ -58,9 +64,8 @@ aside {
   font-size: 20px;
   font-weight: normal;
 }
-.menu {
+.el-menu {
   border-right: none;
-  background-color: transparent;
   -webkit-app-region: no-drag;
 }
 .el-menu-item {
@@ -69,7 +74,6 @@ aside {
   margin-bottom: 5px;
 }
 .el-menu-item:hover {
-  background-color: #fff;
   background-color: var(--el-color-info-light-8);
 }
 .el-menu-item.is-active {
