@@ -31,3 +31,5 @@ coverage
 
 out/
 electron/pages
+types/auto-import.d.ts
+types/components.d.ts

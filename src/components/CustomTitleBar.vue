@@ -9,7 +9,12 @@ const props = defineProps<{
 <template>
   <div v-if="isWindows" class="windows-menu-bar">
     <span class="logo"></span>
-    <el-dropdown placement="bottom-start" popper-class="windows-popper">
+    <el-dropdown
+      placement="bottom-start"
+      size="small"
+      trigger="click"
+      popper-class="windows-popper"
+    >
       <el-button type="primary">Hetu</el-button>
       <template #dropdown>
         <el-dropdown-menu>
@@ -20,14 +25,16 @@ const props = defineProps<{
           </el-dropdown-item>
           <el-dropdown-item><span>检查更新…</span></el-dropdown-item>
           <el-dropdown-item divided>切换账号</el-dropdown-item>
-          <el-dropdown-item>
-            <span>退出 Hetu</span>
-            <span class="shotcut">Ctrl+Q</span>
-          </el-dropdown-item>
+          <el-dropdown-item><span>退出 Hetu</span></el-dropdown-item>
         </el-dropdown-menu>
       </template>
     </el-dropdown>
-    <el-dropdown placement="bottom-start" popper-class="windows-popper">
+    <el-dropdown
+      placement="bottom-start"
+      size="small"
+      trigger="click"
+      popper-class="windows-popper"
+    >
       <el-button type="primary">文件</el-button>
       <template #dropdown>
         <el-dropdown-menu>
@@ -42,7 +49,12 @@ const props = defineProps<{
         </el-dropdown-menu>
       </template>
     </el-dropdown>
-    <el-dropdown placement="bottom-start" popper-class="windows-popper">
+    <el-dropdown
+      placement="bottom-start"
+      size="small"
+      trigger="click"
+      popper-class="windows-popper"
+    >
       <el-button type="primary">窗口</el-button>
       <template #dropdown>
         <el-dropdown-menu>
@@ -61,7 +73,12 @@ const props = defineProps<{
         </el-dropdown-menu>
       </template>
     </el-dropdown>
-    <el-dropdown placement="bottom-start" popper-class="windows-popper">
+    <el-dropdown
+      placement="bottom-start"
+      size="small"
+      trigger="click"
+      popper-class="windows-popper"
+    >
       <el-button type="primary"><span>帮助</span></el-button>
       <template #dropdown>
         <el-dropdown-menu>

@@ -1,10 +1,10 @@
 {
   "name": "hetu",
-  "productName": "河图云平台",
+  "productName": "Hetu",
   "version": "0.0.0",
   "main": "electron/main.js",
   "private": true,
-  "author": "rainblade",
+  "author": "Hetu Tech",
   "description": "Hetu Cloud Platform",
   "type": "module",
   "scripts": {
@@ -48,7 +48,6 @@
     "@vue/eslint-config-prettier": "^9.0.0",
     "@vue/eslint-config-typescript": "^13.0.0",
     "@vue/tsconfig": "^0.5.1",
-    "appdmg": "^0.6.6",
     "electron": "^30.0.3",
     "eslint": "^8.57.0",
     "eslint-plugin-vue": "^9.23.0",
