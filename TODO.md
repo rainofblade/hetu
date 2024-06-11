@@ -25,5 +25,5 @@
 ### 其他
 
 - 安装包：Mac 个性化
-- Windows 测试（electron-squirrel-startup、自定义菜单）
+- Windows 测试（electron-squirrel-startup）
 - 本地文件类型、图标

@@ -5,6 +5,8 @@ contextBridge.exposeInMainWorld('electronAPI', {
   login: () => ipcRenderer.send('login'),
   openDialog: () => ipcRenderer.send('open-dialog'),
   openFile: (filePath) => ipcRenderer.send('open-file', filePath),
+  // for Windows custom menu
+  menuClick: (command) => ipcRenderer.send('menu-click', command),
 
   // 渲染进程 -> 主进程 -> 渲染进程
   set: (key, value) => ipcRenderer.invoke('set', key, value),

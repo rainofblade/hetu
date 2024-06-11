@@ -4,6 +4,7 @@ export interface IElectronAPI {
   login(): void
   openDialog(): void
   openFile(filePath: string): void
+  menuClick(command: string): void
 
   set(key: string, value: any): Promise<any>
   get(key: string): Promise<any>

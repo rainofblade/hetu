@@ -15,7 +15,6 @@ System: macOS 11.2 & Windows 10
 ├─ electron         Electron 源文件
 │  └─ pages         Web 构建产物
 ├─ out              App 构建产物
-├─ public           公共静态资源
 ├─ src              Web 源文件
 ├─ types            声明文件
 ├─ forge.config.js  App 构建配置项

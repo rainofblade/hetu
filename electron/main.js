@@ -113,11 +113,10 @@ const loadProject = (filePath) => {
 
 /*
  ---------------------------------- 
- aboutWindow, settingWindow
+ aboutWindow
  ---------------------------------- 
 */
 let aboutWindow = null
-let settingWindow = null
 
 const openAboutWindow = () => {
   if (aboutWindow === null || aboutWindow.isDestroyed()) {
@@ -127,6 +126,13 @@ const openAboutWindow = () => {
   }
 }
 
+/*
+ ---------------------------------- 
+ settingWindow
+ ---------------------------------- 
+*/
+let settingWindow = null
+
 const openSettingWindow = (path) => {
   if (settingWindow === null || settingWindow.isDestroyed()) {
     settingWindow = createSettingWindow(path)
@@ -134,6 +140,15 @@ const openSettingWindow = (path) => {
     settingWindow.focus()
     settingWindow.webContents.send('route', path)
   }
+}
+
+/*
+ ---------------------------------- 
+ help
+ ---------------------------------- 
+*/
+const openHelpURL = () => {
+  shell.openExternal(HELP_URL)
 }
 
 /*
@@ -200,14 +215,7 @@ const MENU_TPL = [
   },
   {
     label: '帮助',
-    submenu: [
-      {
-        label: '帮助文档',
-        click: () => {
-          shell.openExternal(HELP_URL)
-        }
-      }
-    ]
+    submenu: [{ label: '帮助文档', click: openHelpURL }]
   }
 ]
 
@@ -230,6 +238,47 @@ const disableMenu = (...index) => {
   renderAppMenu()
 }
 
+const handleMenuClick = (event, command) => {
+  switch (command) {
+    case 'about':
+      openAboutWindow()
+      break
+    case 'setting':
+      openSettingWindow('/')
+      break
+    case 'update':
+      openSettingWindow('/update')
+      break
+    case 'switch':
+      switchAccount()
+      break
+    case 'quit':
+      app.quit()
+      break
+    case 'new':
+      openFileWindow()
+      break
+    case 'open':
+      handleOpenDialog()
+      break
+    case 'minimize':
+      windowManager.getFocusedWindow().minimize()
+      break
+    case 'close':
+      windowManager.getFocusedWindow().close()
+      break
+    case 'toggle':
+      const focusedWindow = windowManager.getFocusedWindow()
+      focusedWindow.setFullScreen(!focusedWindow.isFullScreen())
+      break
+    case 'help':
+      openHelpURL()
+      break
+    default:
+      console.log('No command handler')
+  }
+}
+
 /*
  ---------------------------------- 
  App
@@ -240,6 +289,7 @@ app.whenReady().then(() => {
   ipcMain.on('login', handleLogin)
   ipcMain.on('open-dialog', handleOpenDialog)
   ipcMain.on('open-file', handleOpenFile)
+  ipcMain.on('menu-click', handleMenuClick)
   ipcMain.handle('set', (event, key, value) => store.set(key, value))
   ipcMain.handle('get', (event, key) => store.get(key))
   ipcMain.handle('get-app-name', () => app.name)
