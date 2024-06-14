@@ -1,4 +1,5 @@
 import { app, globalShortcut, ipcMain, dialog, Menu, shell } from 'electron'
+import fs from 'node:fs'
 import Store from 'electron-store'
 import { windowManager } from './window-manager.js'
 import {
@@ -32,7 +33,7 @@ const closeLoginWindow = () => {
   enableMenu(1)
 }
 
-const handleLogin = () => {
+const login = () => {
   isLogin = true
   closeLoginWindow()
   openFileWindow()
@@ -81,7 +82,7 @@ const closeFileWindow = () => {
   }
 }
 
-const handleOpenDialog = () => {
+const openFileDialog = () => {
   const focusedWindow = windowManager.getFocusedWindow()
   dialog
     .showOpenDialog(focusedWindow, {
@@ -102,9 +103,45 @@ const handleOpenDialog = () => {
     })
 }
 
-const handleOpenFile = (event, filePath) => {
-  closeFileWindow()
-  loadProject(filePath)
+const openFileFromWeb = (event, filePath) => {
+  openFile(filePath, true)
+}
+
+const openFileFromMenu = (menuItem) => {
+  openFile(menuItem.label, false)
+}
+
+const openFile = (filePath, fromWeb) => {
+  if (fs.existsSync(filePath)) {
+    if (fromWeb) {
+      closeFileWindow()
+    }
+    loadProject(filePath)
+  } else {
+    dialog.showErrorBox('提示', '项目文件不存在')
+    deleteNonExistentItem(filePath)
+    if (fromWeb) {
+      fileWindow.reload()
+    } else {
+      setRecentDocumentsMenu()
+      renderAppMenu()
+    }
+  }
+}
+
+const deleteNonExistentItem = (filePath) => {
+  let recentDocuments = store.get('recentDocuments')
+  let index = recentDocuments.indexOf(filePath)
+  if (index > -1) {
+    recentDocuments.splice(index, 1)
+    store.set('recentDocuments', recentDocuments)
+  }
+}
+
+const clearRecentDocuments = () => {
+  store.set('recentDocuments', [])
+  setRecentDocumentsMenu()
+  renderAppMenu()
 }
 
 const loadProject = (filePath) => {
@@ -195,12 +232,8 @@ const MENU_TPL = [
     submenu: [
       { label: '新建项目…', accelerator: 'CmdOrCtrl+N', click: openFileWindow },
       { type: 'separator' },
-      { label: '打开项目…', accelerator: 'CmdOrCtrl+O', click: handleOpenDialog },
-      {
-        label: '打开最近的项目',
-        role: 'recentDocuments',
-        submenu: [{ type: 'separator' }, { label: '清除最近的项目', role: 'clearRecentDocuments' }]
-      }
+      { label: '打开项目…', accelerator: 'CmdOrCtrl+O', click: openFileDialog },
+      { label: '打开最近的项目', submenu: [] }
     ]
   },
   {
@@ -238,6 +271,23 @@ const disableMenu = (...index) => {
   renderAppMenu()
 }
 
+const MAX_DOCS = 8
+const setRecentDocumentsMenu = () => {
+  MENU_TPL[1].submenu[3].submenu = [
+    { type: 'separator' },
+    { label: '清除最近的项目', click: clearRecentDocuments }
+  ]
+  const submenu = MENU_TPL[1].submenu[3].submenu
+  let recentDocuments = store.get('recentDocuments')
+  if (typeof recentDocuments !== 'undefined' && recentDocuments.length !== 0) {
+    for (let i = Math.min(MAX_DOCS, recentDocuments.length) - 1; i > -1; i--) {
+      submenu.unshift({ label: recentDocuments[i], click: openFileFromMenu })
+    }
+  } else {
+    submenu.unshift({ label: '无', enabled: false })
+  }
+}
+
 const handleMenuClick = (event, command) => {
   switch (command) {
     case 'about':
@@ -259,7 +309,7 @@ const handleMenuClick = (event, command) => {
       openFileWindow()
       break
     case 'open':
-      handleOpenDialog()
+      openFileDialog()
       break
     case 'minimize':
       windowManager.getFocusedWindow().minimize()
@@ -286,10 +336,10 @@ const handleMenuClick = (event, command) => {
 */
 app.whenReady().then(() => {
   // 进程通信
-  ipcMain.on('login', handleLogin)
-  ipcMain.on('open-dialog', handleOpenDialog)
-  ipcMain.on('open-file', handleOpenFile)
-  ipcMain.on('menu-click', handleMenuClick)
+  ipcMain.on('login', login)
+  ipcMain.on('open-dialog', openFileDialog)
+  ipcMain.on('open-file', openFileFromWeb)
+  ipcMain.on('menu-click', handleMenuClick) // for Windows
   ipcMain.handle('set', (event, key, value) => store.set(key, value))
   ipcMain.handle('get', (event, key) => store.get(key))
   ipcMain.handle('get-app-name', () => app.name)
@@ -325,6 +375,8 @@ app.whenReady().then(() => {
       }
     }
   })
+
+  setRecentDocumentsMenu()
 
   renderAppMenu()
 
