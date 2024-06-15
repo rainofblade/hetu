@@ -11,11 +11,9 @@ const openDialog = () => {
   <div class="file">
     <el-container>
       <el-aside>
-        <h1 class="title">新建项目</h1>
         <TemplateList />
       </el-aside>
       <el-main>
-        <h1 class="title">最近的项目</h1>
         <RecentFileList />
         <el-button type="primary" plain @click="openDialog">打开项目…</el-button>
       </el-main>
@@ -40,10 +38,5 @@ aside {
 }
 main {
   padding: 0 20px;
-}
-.title {
-  margin: 40px 0 20px 0;
-  font-size: 20px;
-  font-weight: normal;
 }
 </style>

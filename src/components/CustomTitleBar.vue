@@ -29,7 +29,7 @@ const handleMenuClick = (command: string) => {
             <span class="shotcut">Ctrl+逗号</span>
           </el-dropdown-item>
           <el-dropdown-item command="update"><span>检查更新…</span></el-dropdown-item>
-          <el-dropdown-item command="switch" divided>切换账号</el-dropdown-item>
+          <el-dropdown-item command="switch" divided><span>切换账号</span></el-dropdown-item>
           <el-dropdown-item command="quit"><span>退出 Hetu</span></el-dropdown-item>
         </el-dropdown-menu>
       </template>
@@ -51,6 +51,9 @@ const handleMenuClick = (command: string) => {
           <el-dropdown-item command="open" divided>
             <span>打开项目…</span>
             <span class="shotcut">Ctrl+O</span>
+          </el-dropdown-item>
+          <el-dropdown-item command="new">
+            <span>打开最近的项目</span>
           </el-dropdown-item>
         </el-dropdown-menu>
       </template>

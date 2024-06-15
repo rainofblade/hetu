@@ -22,5 +22,14 @@ const projects = ref([
 </script>
 
 <template>
+  <h1 class="title">新建项目</h1>
   <TemplateItem v-for="project in projects" v-bind="project" />
 </template>
+
+<style scoped>
+.title {
+  margin: 40px 0 20px 0;
+  font-size: 20px;
+  font-weight: normal;
+}
+</style>

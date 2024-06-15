@@ -4,7 +4,6 @@
 - ✅ logout请求
 - ✅ 帮助
 - 检查更新
-- 最近项目
 
 ### login.html
 
@@ -14,16 +13,15 @@
 ### file.html
 
 - 新建项目表单
-- 创建本地文件（hp1/hp2/hpb）
 
 ### index.html
 
-- 读取、解析、渲染文件（hp1/hp2/hpb）
-- 图表渲染
-- 保存文件
+- 创建、保存、读取渲染、同步文件（hp1/hp2/hpb）
+- 最近项目（store 新增、调序）
+- 树、图表、可缩放画布
 
 ### 其他
 
+- Windows兼容（electron-squirrel-startup）
+- 注册本地文件类型、图标
 - 安装包：Mac 个性化
-- Windows 测试（electron-squirrel-startup）
-- 本地文件类型、图标

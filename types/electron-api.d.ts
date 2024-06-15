@@ -5,6 +5,7 @@ export interface IElectronAPI {
   openDialog(): void
   openFile(filePath: string): void
   menuClick(command: string): void
+  clearRecentDocuments(): void
 
   set(key: string, value: any): Promise<any>
   get(key: string): Promise<any>

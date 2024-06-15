@@ -119,7 +119,7 @@ const openFile = (filePath, fromWeb) => {
     loadProject(filePath)
   } else {
     dialog.showErrorBox('提示', '项目文件不存在')
-    deleteNonExistentItem(filePath)
+    deleteNonExistentPath(filePath)
     if (fromWeb) {
       fileWindow.reload()
     } else {
@@ -129,7 +129,7 @@ const openFile = (filePath, fromWeb) => {
   }
 }
 
-const deleteNonExistentItem = (filePath) => {
+const deleteNonExistentPath = (filePath) => {
   let recentDocuments = store.get('recentDocuments')
   let index = recentDocuments.indexOf(filePath)
   if (index > -1) {
@@ -138,10 +138,15 @@ const deleteNonExistentItem = (filePath) => {
   }
 }
 
-const clearRecentDocuments = () => {
+const clearRecentDocumentsFromMenu = () => {
   store.set('recentDocuments', [])
   setRecentDocumentsMenu()
   renderAppMenu()
+}
+
+const clearRecentDocumentsFromWeb = () => {
+  store.set('recentDocuments', [])
+  fileWindow.reload()
 }
 
 const loadProject = (filePath) => {
@@ -275,7 +280,7 @@ const MAX_DOCS = 8
 const setRecentDocumentsMenu = () => {
   MENU_TPL[1].submenu[3].submenu = [
     { type: 'separator' },
-    { label: '清除最近的项目', click: clearRecentDocuments }
+    { label: '清除最近的项目', click: clearRecentDocumentsFromMenu }
   ]
   const submenu = MENU_TPL[1].submenu[3].submenu
   let recentDocuments = store.get('recentDocuments')
@@ -340,6 +345,7 @@ app.whenReady().then(() => {
   ipcMain.on('open-dialog', openFileDialog)
   ipcMain.on('open-file', openFileFromWeb)
   ipcMain.on('menu-click', handleMenuClick) // for Windows
+  ipcMain.on('clear-recent-documents', clearRecentDocumentsFromWeb)
   ipcMain.handle('set', (event, key, value) => store.set(key, value))
   ipcMain.handle('get', (event, key) => store.get(key))
   ipcMain.handle('get-app-name', () => app.name)
