@@ -1,8 +1,8 @@
 import { app, BrowserWindow } from 'electron'
 import { fileURLToPath } from 'node:url'
 import path from 'node:path'
-import { windowManager } from './window-manager.js'
-import { HOST } from './config.js'
+import windowManager from './window-manager.js'
+import { HOST } from '../config.js'
 
 // in ESM __driname is undefined
 const filename = fileURLToPath(import.meta.url)
@@ -15,7 +15,7 @@ class CustomWindow extends BrowserWindow {
       frame: false,
       titleBarStyle: 'hidden',
       webPreferences: {
-        preload: path.join(dirname, 'preload.js'),
+        preload: path.join(dirname, '../preload.js'),
         spellcheck: false
       },
       ...options
@@ -45,16 +45,19 @@ class CustomWindow extends BrowserWindow {
     })
 
     if (!!options.localFile) {
+      // 本地无需构建页面
       this.loadFile(path.resolve(dirname, options.entryFile))
     } else {
       if (!app.isPackaged) {
+        // 开发环境
         this.loadURL(`${HOST}/${options.entryFile}`)
         this.webContents.openDevTools()
       } else {
-        this.loadFile(path.resolve(dirname, 'pages', options.entryFile))
+        // 生产环境
+        this.loadFile(path.resolve(dirname, '../pages', options.entryFile))
       }
     }
   }
 }
 
-export { CustomWindow }
+export default CustomWindow

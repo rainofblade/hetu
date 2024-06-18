@@ -36,4 +36,4 @@ class WindowManager {
 
 const windowManager = new WindowManager()
 
-export { windowManager }
+export default windowManager
