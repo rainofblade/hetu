@@ -17,7 +17,6 @@ const login = () => {
   showLogin.value = false
 
   // TODO: login请求
-  console.log(username.value, password.value, autoLogin.value)
 
   // login error
   // setTimeout(() => {

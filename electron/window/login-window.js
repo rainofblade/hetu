@@ -61,9 +61,6 @@ class LoginWindow {
           this.open()
         }
       })
-      .catch((err) => {
-        console.log(err)
-      })
   }
 }
 

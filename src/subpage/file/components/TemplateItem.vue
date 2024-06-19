@@ -4,10 +4,14 @@ defineProps<{
   title: string
   description: string
 }>()
+
+const emit = defineEmits<{
+  openDrawer: [type: number]
+}>()
 </script>
 
 <template>
-  <el-card shadow="hover">
+  <el-card shadow="hover" @click="$emit('openDrawer', type)">
     <span class="p-type" :class="`p-type-${type}`"></span>
     <span class="title">{{ title }}</span>
     <p>{{ description }}</p>

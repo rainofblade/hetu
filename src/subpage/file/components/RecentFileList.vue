@@ -3,7 +3,7 @@ import { ref, onMounted } from 'vue'
 import FileItem from './FileItem.vue'
 
 const files = ref<any[]>([])
-const MAX_DOCS = 8
+const MAX_DOCS_NUM = 8
 
 const clearRecentDocuments = () => {
   electronAPI.clearRecentDocuments()
@@ -14,7 +14,7 @@ onMounted(() => {
     const recentDocuments = await electronAPI.get('recentDocuments')
     if (typeof recentDocuments !== 'undefined') {
       let list = [],
-        max = Math.min(recentDocuments.length, MAX_DOCS)
+        max = Math.min(recentDocuments.length, MAX_DOCS_NUM)
       for (let i = 0; i < max; i++) {
         list.push({ filePath: recentDocuments[i] })
       }

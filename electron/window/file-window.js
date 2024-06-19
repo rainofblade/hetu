@@ -1,6 +1,6 @@
 import fs from 'node:fs'
 import { dialog } from 'electron'
-import store from '../lib/store.js'
+import store, { deleteNonExistentPath } from '../lib/store.js'
 import CustomWindow from '../lib/custom-window.js'
 import windowManager from '../lib/window-manager.js'
 
@@ -54,7 +54,7 @@ class FileWindow {
           if (focusedWindow === this.instance) {
             this.close()
           }
-          this.loadProject(result.filePaths[0])
+          this.mainWindow.open(result.filePaths[0])
         }
       })
       .catch((err) => {
@@ -75,24 +75,15 @@ class FileWindow {
       if (fromWeb) {
         this.close()
       }
-      this.loadProject(filePath)
+      this.mainWindow.open(filePath)
     } else {
       dialog.showErrorBox('提示', '项目文件不存在')
-      this.deleteNonExistentPath(filePath)
+      deleteNonExistentPath(filePath)
       if (fromWeb) {
         this.instance.reload()
       } else {
         this.appMenu.setRecentDocuments(this.openFileFromMenu)
       }
-    }
-  }
-
-  deleteNonExistentPath(filePath) {
-    let recentDocuments = store.get('recentDocuments')
-    let index = recentDocuments.indexOf(filePath)
-    if (index > -1) {
-      recentDocuments.splice(index, 1)
-      store.set('recentDocuments', recentDocuments)
     }
   }
 
@@ -104,10 +95,6 @@ class FileWindow {
   clearRecentDocumentsFromWeb = () => {
     store.set('recentDocuments', [])
     this.instance.reload()
-  }
-
-  loadProject = (filePath) => {
-    this.mainWindow.open(filePath)
   }
 }
 

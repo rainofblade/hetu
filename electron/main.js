@@ -110,9 +110,6 @@ const handleMenuClick = (event, command) => {
       break
     case 'help':
       openHelpURL()
-      break
-    default:
-      console.log('No command handler')
   }
 }
 
@@ -160,8 +157,9 @@ app.whenReady().then(() => {
   })
 
   // 创建菜单
-  appMenu.addTemplate(APP_MENU_TPL, RECENT_SUBMENU_TPL)
+  appMenu.bindTemplate(APP_MENU_TPL, RECENT_SUBMENU_TPL)
   appMenu.setRecentDocuments(fileWindow.openFileFromMenu)
 
+  // 登录
   loginWindow.open()
 })

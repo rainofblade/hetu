@@ -12,7 +12,7 @@
 
 ### file.html
 
-- 新建项目表单
+- ✅ 新建项目表单
 
 ### index.html
 
@@ -22,6 +22,4 @@
 
 ### 其他
 
-- Windows兼容（electron-squirrel-startup）
-- 注册本地文件类型、图标
-- 安装包：Mac 个性化
+- ✅ Windows兼容（electron-squirrel-startup）

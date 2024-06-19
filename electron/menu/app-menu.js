@@ -6,9 +6,9 @@ const MAX_DOCS_NUM = 8
 class AppMenu {
   constructor() {}
 
-  addTemplate = (tpl, recentTpl) => {
+  bindTemplate = (tpl, recentDocsTpl) => {
     this.tpl = tpl
-    this.recentTpl = recentTpl
+    this.recentDocsTpl = recentDocsTpl
   }
 
   render = () => {
@@ -31,11 +31,10 @@ class AppMenu {
   }
 
   setRecentDocuments = (callback) => {
-    this.tpl[1].submenu[3].submenu = this.recentTpl.slice()
+    this.tpl[1].submenu[3].submenu = this.recentDocsTpl.slice() // 重置
     const submenu = this.tpl[1].submenu[3].submenu
 
     let recentDocuments = store.get('recentDocuments')
-
     if (typeof recentDocuments !== 'undefined' && recentDocuments.length !== 0) {
       for (let i = Math.min(MAX_DOCS_NUM, recentDocuments.length) - 1; i > -1; i--) {
         submenu.unshift({ label: recentDocuments[i], click: callback })
